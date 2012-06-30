@@ -15,6 +15,7 @@
 		E1C82F57159EAF2200445D31 /* CalculatorAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C82F56159EAF2200445D31 /* CalculatorAppDelegate.m */; };
 		E1C82F5A159EAF2200445D31 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1C82F58159EAF2200445D31 /* MainStoryboard.storyboard */; };
 		E1C82F5D159EAF2200445D31 /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C82F5C159EAF2200445D31 /* CalculatorViewController.m */; };
+		E1C82F65159EC22C00445D31 /* CalculatorBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C82F64159EC22C00445D31 /* CalculatorBrain.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		E1C82F59159EAF2200445D31 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		E1C82F5B159EAF2200445D31 /* CalculatorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalculatorViewController.h; sourceTree = "<group>"; };
 		E1C82F5C159EAF2200445D31 /* CalculatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalculatorViewController.m; sourceTree = "<group>"; };
+		E1C82F63159EC22C00445D31 /* CalculatorBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorBrain.h; sourceTree = "<group>"; };
+		E1C82F64159EC22C00445D31 /* CalculatorBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorBrain.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +80,8 @@
 		E1C82F4C159EAF2200445D31 /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				E1C82F63159EC22C00445D31 /* CalculatorBrain.h */,
+				E1C82F64159EC22C00445D31 /* CalculatorBrain.m */,
 				E1C82F55159EAF2200445D31 /* CalculatorAppDelegate.h */,
 				E1C82F56159EAF2200445D31 /* CalculatorAppDelegate.m */,
 				E1C82F58159EAF2200445D31 /* MainStoryboard.storyboard */,
@@ -165,6 +170,7 @@
 				E1C82F53159EAF2200445D31 /* main.m in Sources */,
 				E1C82F57159EAF2200445D31 /* CalculatorAppDelegate.m in Sources */,
 				E1C82F5D159EAF2200445D31 /* CalculatorViewController.m in Sources */,
+				E1C82F65159EC22C00445D31 /* CalculatorBrain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
