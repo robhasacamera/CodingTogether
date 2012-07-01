@@ -12,7 +12,12 @@
 @interface CalculatorViewController ()
 
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
+@property (nonatomic) BOOL userAlreadyEnteredADecimal;
 @property (nonatomic, strong) CalculatorBrain *brain;
+
+- (void)resetStatesForNumberEntry;
+
+- (void)appendDigitToDisplay:(NSString *)digitAsString;
 
 @end
 
@@ -20,6 +25,7 @@
 
 @synthesize display;
 @synthesize userIsInTheMiddleOfEnteringANumber;
+@synthesize userAlreadyEnteredADecimal;
 @synthesize brain = _brain;
 
 - (CalculatorBrain *)brain {
@@ -32,24 +38,27 @@
 
 - (IBAction)digitPressed:(UIButton *)sender {
     NSString *digit = sender.currentTitle;
-    if (self.userIsInTheMiddleOfEnteringANumber) {
-        self.display.text = [self.display.text stringByAppendingString:digit];
-    } else {
-        self.display.text = digit;
-        self.userIsInTheMiddleOfEnteringANumber = YES;
-    }
+    [self appendDigitToDisplay:digit];
 
+}
+
+- (IBAction)decimalPressed {
+    if (!self.userAlreadyEnteredADecimal) {
+        [self appendDigitToDisplay:@"."];
+        
+        self.userAlreadyEnteredADecimal = YES;
+    }
 }
 
 - (IBAction)enterPressed {
     [self.brain pushOperand:[self.display.text doubleValue]];
-    self.userIsInTheMiddleOfEnteringANumber = NO;
+    [self resetStatesForNumberEntry];
 }
 
 - (IBAction)clearPressed {
     [self.brain clearAllOperands];
     self.display.text = @"0";
-    self.userIsInTheMiddleOfEnteringANumber = NO;
+    [self resetStatesForNumberEntry];
 }
 
 - (IBAction)operationPressed:(UIButton *)sender {
@@ -62,6 +71,20 @@
     double result = [self.brain performOperation:operation];
     
     self.display.text = [NSString stringWithFormat:@"%g", result];
+}
+
+- (void)resetStatesForNumberEntry {
+    self.userIsInTheMiddleOfEnteringANumber = NO;
+    self.userAlreadyEnteredADecimal = NO;
+}
+
+- (void)appendDigitToDisplay:(NSString *)digitAsString {
+    if (self.userIsInTheMiddleOfEnteringANumber) {
+        self.display.text = [self.display.text stringByAppendingString:digitAsString];
+    } else {
+        self.display.text = digitAsString;
+        self.userIsInTheMiddleOfEnteringANumber = YES;
+    }
 }
 
 @end
