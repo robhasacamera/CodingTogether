@@ -46,7 +46,7 @@
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
-- (IBAction)operationPressed:(id)sender {
+- (IBAction)operationPressed:(UIButton *)sender {
     if (self.userIsInTheMiddleOfEnteringANumber) {
         [self enterPressed];
     }
