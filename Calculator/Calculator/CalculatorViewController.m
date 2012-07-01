@@ -18,12 +18,14 @@
 - (void)resetStatesForNumberEntry;
 
 - (void)appendDigitToDisplay:(NSString *)digitAsString;
+- (void)appendStringToHistroyDisplay:(NSString *)stringToAppend withPrependedSpace:(BOOL)prependSpace;
 
 @end
 
 @implementation CalculatorViewController
 
 @synthesize display;
+@synthesize historyDisplay;
 @synthesize userIsInTheMiddleOfEnteringANumber;
 @synthesize userAlreadyEnteredADecimal;
 @synthesize brain = _brain;
@@ -52,6 +54,9 @@
 
 - (IBAction)enterPressed {
     [self.brain pushOperand:[self.display.text doubleValue]];
+    
+    [self appendStringToHistroyDisplay:self.display.text withPrependedSpace:YES];
+    
     [self resetStatesForNumberEntry];
 }
 
@@ -59,6 +64,7 @@
     [self.brain clearAllOperands];
     self.display.text = @"0";
     [self resetStatesForNumberEntry];
+    self.historyDisplay.text = @"";
 }
 
 - (IBAction)operationPressed:(UIButton *)sender {
@@ -67,6 +73,8 @@
     }
     
     NSString *operation = [sender currentTitle];
+    
+    [self appendStringToHistroyDisplay:operation withPrependedSpace:YES];
     
     double result = [self.brain performOperation:operation];
     
@@ -87,4 +95,16 @@
     }
 }
 
+- (void)appendStringToHistroyDisplay:(NSString *)stringToAppend withPrependedSpace:(BOOL)prependSpace {
+    if (prependSpace && self.historyDisplay.text != @"") {
+        self.historyDisplay.text = [self.historyDisplay.text stringByAppendingString:@" "];
+    }
+    
+    self.historyDisplay.text = [self.historyDisplay.text stringByAppendingString:stringToAppend];
+}
+
+- (void)viewDidUnload {
+    [self setHistoryDisplay:nil];
+    [super viewDidUnload];
+}
 @end
