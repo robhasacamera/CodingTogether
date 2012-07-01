@@ -47,8 +47,9 @@
 }
 
 - (IBAction)clearPressed {
-    //clear all operands
-    //reset the display
+    [self.brain clearAllOperands];
+    self.display.text = @"0";
+    self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
 - (IBAction)operationPressed:(UIButton *)sender {

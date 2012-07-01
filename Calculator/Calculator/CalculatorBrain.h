@@ -14,6 +14,8 @@
 
 - (double)popOperand;
 
+- (void)clearAllOperands;
+
 - (double)performOperation:(NSString *)operation;
 
 @end
