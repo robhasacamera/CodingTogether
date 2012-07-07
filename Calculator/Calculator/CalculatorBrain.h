@@ -10,12 +10,18 @@
 
 @interface CalculatorBrain : NSObject
 
-- (void)pushOperand:(double)operand;
+@property (readonly) id program;
 
-- (double)popOperand;
+- (void)pushOperand:(double)operand;
 
 - (void)clearAllOperands;
 
 - (double)performOperation:(NSString *)operation;
+
++ (double)runProgram:(id)program;
+
++ (NSString *)descriptionOfProgram:(id)program;
+
++ (double)popOperandOffStack:(NSMutableArray *)stack;
 
 @end
