@@ -22,6 +22,8 @@
 
 + (BOOL)isNoOperandOperation:(NSString *)operation;
 
++ (NSString *)descriptionOfTopOfStack:(NSMutableArray *)stack;
+
 @end
 
 #pragma mark - Implementation
@@ -71,7 +73,8 @@
 
 // TODO: Need to implement according to ticket #14
 + (NSString *)descriptionOfProgram:(id)program {
-    NSString *description = nil;
+    /*
+     NSString *description = nil;
     
     //this is not what's needed
     for (int i=0; i<[program count]; i++) {
@@ -86,11 +89,20 @@
     
     // regular (dual operand) operations are inserted before the last digit.
     
-    // single operand operations 
+    // single operand operations should encapsulate 
     
     // pi and variables are inserted the same as doubles
     
+    // recursively consume the stack
+    
+    // get rid of extra parens
+    
     return description;
+     */
+    
+    NSMutableArray *programStack = [program mutableCopy];
+    
+    return [self descriptionOfTopOfStack:programStack];
 }
 
 + (double)runProgram:(id)program {
@@ -213,6 +225,33 @@
                                   nil];
     
     return [noOperandOperations containsObject:operation];
+}
+
++ (NSString *)descriptionOfTopOfStack:(NSMutableArray *)stack {
+    NSString *description = nil;
+    
+    if ([self isDoubleOperandOperation:[stack lastObject]]) {
+        NSString *doubleOperation = [stack lastObject];
+        
+        [stack removeLastObject];
+        
+        description = [[NSString alloc]initWithFormat:@"(%@ %@ %@)",
+                       [self descriptionOfTopOfStack:stack],
+                       doubleOperation,
+                       [self descriptionOfTopOfStack:stack]];
+    } else if ([self isSingleOperandOperation:[stack lastObject]]) {
+        NSString *singleOperation = [stack lastObject];
+        
+        [stack removeLastObject];
+        
+        description = [singleOperation stringByAppendingFormat:@"(%@)", [self descriptionOfTopOfStack:stack]];
+    } else {
+        description = [[NSString alloc]initWithFormat:@"%@", [stack lastObject]];
+        
+        [stack removeLastObject];
+    }
+
+    return description;
 }
 
 @end
