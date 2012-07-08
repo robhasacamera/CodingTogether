@@ -108,16 +108,10 @@
         program = [program mutableCopy];
         
         for (int i=0; i<[program count]; i++) {
-            id programObject = [program objectAtIndex:i];
-            
-            if (![programObject isKindOfClass:[NSNumber class]] || ![self isOperation:programObject]) {
-                NSNumber *variableValue = [variableValues objectForKey:programObject];
+            NSNumber *value = [variableValues objectForKey:[program objectAtIndex:i]];
                 
-                if (!variableValue) {
-                    variableValue = [NSNumber numberWithDouble:0];
-                } 
-                
-                [program replaceObjectAtIndex:i withObject:variableValue];
+            if (!value) {
+                [program replaceObjectAtIndex:i withObject:value];
             }
         }
     }
