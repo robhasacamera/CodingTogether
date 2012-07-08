@@ -18,7 +18,6 @@
 - (void)resetStatesForNumberEntry;
 
 - (void)appendDigitToDisplay:(NSString *)digitAsString;
-- (void)appendStringToHistroyDisplay:(NSString *)stringToAppend withPrependedSpace:(BOOL)prependSpace;
 
 @end
 
@@ -55,7 +54,7 @@
 - (IBAction)enterPressed {
     [self.brain pushOperand:[self.display.text doubleValue]];
     
-    [self appendStringToHistroyDisplay:self.display.text withPrependedSpace:YES];
+    self.historyDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
     
     [self resetStatesForNumberEntry];
 }
@@ -74,11 +73,11 @@
     
     NSString *operation = [sender currentTitle];
     
-    [self appendStringToHistroyDisplay:operation withPrependedSpace:YES];
-    
     double result = [self.brain performOperation:operation];
     
     self.display.text = [NSString stringWithFormat:@"%g", result];
+    
+    self.historyDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
 }
 
 - (void)resetStatesForNumberEntry {
@@ -93,14 +92,6 @@
         self.display.text = digitAsString;
         self.userIsInTheMiddleOfEnteringANumber = YES;
     }
-}
-
-- (void)appendStringToHistroyDisplay:(NSString *)stringToAppend withPrependedSpace:(BOOL)prependSpace {
-    if (prependSpace && self.historyDisplay.text != @"") {
-        self.historyDisplay.text = [self.historyDisplay.text stringByAppendingString:@" "];
-    }
-    
-    self.historyDisplay.text = [self.historyDisplay.text stringByAppendingString:stringToAppend];
 }
 
 - (void)viewDidUnload {

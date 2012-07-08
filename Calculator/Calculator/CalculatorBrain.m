@@ -47,6 +47,16 @@
 + (NSString *)descriptionOfProgram:(id)program {
     NSString *description = nil;
     
+    for (int i=0; i<[program count]; i++) {
+        if (description) {
+            description = [description stringByAppendingString:@" "];
+        } else {
+            description = @"";
+        }
+        
+        description = [description stringByAppendingFormat:@"%@", [program objectAtIndex:i]];
+    }
+    
     return description;
 }
 
