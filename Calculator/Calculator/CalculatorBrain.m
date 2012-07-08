@@ -13,7 +13,6 @@
 @interface CalculatorBrain ()
 
 @property (nonatomic, strong) NSMutableArray *programStack;
-@property (nonatomic, strong) NSMutableDictionary *variableDictionary;
 
 + (BOOL)isOperation:(NSString *)operation;
 
@@ -30,7 +29,6 @@
 @implementation CalculatorBrain
 
 @synthesize programStack = _programStack;
-@synthesize variableDictionary = _variableDictionary;
 
 #pragma mark - Getters (public)
 
@@ -48,24 +46,16 @@
     return _programStack;
 }
 
-- (NSMutableDictionary *)variableDictionary {
-    if (!_variableDictionary) {
-        _variableDictionary = [[NSMutableDictionary alloc]init];
-    }
-    
-    return _variableDictionary;
-}
-
 #pragma mark - Methods (public)
 
 - (void)pushOperand:(double)operand {
     [self.programStack addObject:[NSNumber numberWithDouble:operand]];
 }
 
-- (void)pushVariable:(NSString *)variable withValue:(double)value {
-    // check to see if its an operation
-    
-    //if its not an operation, add it to the variable dictionary
+- (void)pushVariable:(NSString *)variable {
+    if (![CalculatorBrain isOperation:variable]) {
+        [self.programStack addObject:variable];
+    }
 }
 
 - (void)clearAllOperands {
@@ -76,6 +66,8 @@
     [self.programStack addObject:operation];
     return [CalculatorBrain runProgram:self.program];
 }
+
+#pragma mark -
 
 // TODO: Need to implement according to ticket #14
 + (NSString *)descriptionOfProgram:(id)program {
@@ -109,6 +101,15 @@
     }
     
     return [self popOperandOffStack:stack];
+}
+
++ (double)runProgram:(id)program usingVariableValues:(NSDictionary *)variableValues {
+    // make sure the program is a NSArray, then mutableCopy it
+    
+    // replace all variables in the program array with the values in the variable dictionary.
+    
+    // return the result of runProgram
+    return 0;
 }
 
 + (double)popOperandOffStack:(NSMutableArray *)stack {
