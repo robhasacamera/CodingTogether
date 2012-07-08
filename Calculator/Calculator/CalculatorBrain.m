@@ -113,7 +113,7 @@
             if (![programObject isKindOfClass:[NSNumber class]] || ![self isOperation:programObject]) {
                 NSNumber *variableValue = [variableValues objectForKey:programObject];
                 
-                if (!variableValues) {
+                if (!variableValue) {
                     variableValue = [NSNumber numberWithDouble:0];
                 } 
                 
