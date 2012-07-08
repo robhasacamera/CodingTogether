@@ -104,12 +104,25 @@
 }
 
 + (double)runProgram:(id)program usingVariableValues:(NSDictionary *)variableValues {
-    // make sure the program is a NSArray, then mutableCopy it
+    if ([program isKindOfClass:[NSArray class]]) {
+        program = [program mutableCopy];
+        
+        for (int i=0; i<[program count]; i++) {
+            id programObject = [program objectAtIndex:i];
+            
+            if (![programObject isKindOfClass:[NSNumber class]] || ![self isOperation:programObject]) {
+                NSNumber *variableValue = [variableValues objectForKey:programObject];
+                
+                if (!variableValues) {
+                    variableValue = [NSNumber numberWithDouble:0];
+                } 
+                
+                [program replaceObjectAtIndex:i withObject:variableValue];
+            }
+        }
+    }
     
-    // replace all variables in the program array with the values in the variable dictionary.
-    
-    // return the result of runProgram
-    return 0;
+    return [self runProgram:program];
 }
 
 + (double)popOperandOffStack:(NSMutableArray *)stack {
