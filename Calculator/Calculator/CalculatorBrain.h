@@ -28,4 +28,6 @@
 
 + (double)popOperandOffStack:(NSMutableArray *)stack;
 
++ (NSSet *)variablesUsedInProgram:(id)program;
+
 @end

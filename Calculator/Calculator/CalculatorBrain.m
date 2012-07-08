@@ -161,6 +161,14 @@
     return result;
 }
 
++ (NSSet *)variablesUsedInProgram:(id)program {
+    NSSet *variables = nil;
+    
+    // get all variables in program
+    
+    return variables;
+}
+
 #pragma mark - Methods (private)
 
 + (BOOL)isOperation:(NSString *)operation {
