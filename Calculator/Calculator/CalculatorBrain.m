@@ -164,7 +164,16 @@
 + (NSSet *)variablesUsedInProgram:(id)program {
     NSSet *variables = nil;
     
-    // get all variables in program
+    for (int i=0; i<[program count]; i++) {
+        if ([[program objectAtIndex:i] isKindOfClass:[NSString class]] 
+            && ![self isOperation:[program objectAtIndex:i]]) {
+            if (!variables) {
+                variables = [[NSSet alloc]init];
+            }
+            
+            variables = [variables setByAddingObject:[program objectAtIndex:i]];
+        }
+    }
     
     return variables;
 }
