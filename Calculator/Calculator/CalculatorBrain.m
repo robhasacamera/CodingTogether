@@ -228,25 +228,33 @@
 }
 
 + (NSString *)descriptionOfTopOfStack:(NSMutableArray *)stack {
-    NSString *description = nil;
+    NSString *description = @"";
     
     if ([self isDoubleOperandOperation:[stack lastObject]]) {
         NSString *doubleOperation = [stack lastObject];
         
         [stack removeLastObject];
         
+        NSString *secondOperand = [self descriptionOfTopOfStack:stack];
+        NSString *firstOperand = [self descriptionOfTopOfStack:stack];
+        
+        
         description = [[NSString alloc]initWithFormat:@"(%@ %@ %@)",
-                       [self descriptionOfTopOfStack:stack],
+                       firstOperand,
                        doubleOperation,
-                       [self descriptionOfTopOfStack:stack]];
+                       secondOperand];
     } else if ([self isSingleOperandOperation:[stack lastObject]]) {
         NSString *singleOperation = [stack lastObject];
         
         [stack removeLastObject];
         
-        description = [singleOperation stringByAppendingFormat:@"(%@)", [self descriptionOfTopOfStack:stack]];
-    } else {
-        description = [[NSString alloc]initWithFormat:@"%@", [stack lastObject]];
+        description = [singleOperation stringByAppendingFormat:@"(%@)", 
+                       [self descriptionOfTopOfStack:stack]];
+    } else if ([self isNoOperandOperation:[stack lastObject]]
+               || [[stack lastObject] isKindOfClass:[NSNumber class]]
+               || [[stack lastObject] isKindOfClass:[NSString class]]){
+        description = [[NSString alloc]initWithFormat:@"%@", 
+                       [stack lastObject]];
         
         [stack removeLastObject];
     }
