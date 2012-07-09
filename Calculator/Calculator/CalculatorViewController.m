@@ -88,6 +88,12 @@
     self.historyDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
 }
 
+- (IBAction)variablePressed:(UIButton *)sender {
+    NSString *variable = sender.currentTitle;
+    
+    [self.brain pushVariable:variable];
+}
+
 #pragma mark - Methods (private)
 
 - (void)resetStatesForNumberEntry {
