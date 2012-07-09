@@ -9,6 +9,8 @@
 #import "CalculatorViewController.h"
 #import "CalculatorBrain.h"
 
+#pragma mark - Private properties and operations
+
 @interface CalculatorViewController ()
 
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
@@ -21,6 +23,8 @@
 
 @end
 
+#pragma mark - Implementation
+
 @implementation CalculatorViewController
 
 @synthesize display;
@@ -29,6 +33,8 @@
 @synthesize userAlreadyEnteredADecimal;
 @synthesize brain = _brain;
 
+#pragma mark - Getters (private)
+
 - (CalculatorBrain *)brain {
     if (!_brain) {
         _brain = [[CalculatorBrain alloc]init];
@@ -36,6 +42,8 @@
     
     return _brain;
 }
+
+#pragma mark - Actions
 
 - (IBAction)digitPressed:(UIButton *)sender {
     NSString *digit = sender.currentTitle;
@@ -79,6 +87,8 @@
     
     self.historyDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
 }
+
+#pragma mark - Methods (private)
 
 - (void)resetStatesForNumberEntry {
     self.userIsInTheMiddleOfEnteringANumber = NO;
