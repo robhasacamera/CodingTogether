@@ -16,10 +16,13 @@
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
 @property (nonatomic) BOOL userAlreadyEnteredADecimal;
 @property (nonatomic, strong) CalculatorBrain *brain;
+@property (nonatomic, strong) NSDictionary *testVariableValues;
 
 - (void)resetStatesForNumberEntry;
 
 - (void)appendDigitToDisplay:(NSString *)digitAsString;
+
+- (void)updateDisplay;
 
 @end
 
@@ -32,6 +35,7 @@
 @synthesize userIsInTheMiddleOfEnteringANumber;
 @synthesize userAlreadyEnteredADecimal;
 @synthesize brain = _brain;
+@synthesize testVariableValues;
 
 #pragma mark - Getters (private)
 
@@ -62,7 +66,7 @@
 - (IBAction)enterPressed {
     [self.brain pushOperand:[self.display.text doubleValue]];
     
-    self.historyDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
+    [self updateDisplay];
     
     [self resetStatesForNumberEntry];
 }
@@ -81,17 +85,55 @@
     
     NSString *operation = [sender currentTitle];
     
-    double result = [self.brain performOperation:operation];
+    [self.brain performOperation:operation];
     
-    self.display.text = [NSString stringWithFormat:@"%g", result];
-    
-    self.historyDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
+    [self updateDisplay];
 }
 
 - (IBAction)variablePressed:(UIButton *)sender {
     NSString *variable = sender.currentTitle;
     
     [self.brain pushVariable:variable];
+    
+    [self updateDisplay];
+}
+
+- (IBAction)test1Pressed {
+    self.testVariableValues = [[NSDictionary alloc]initWithObjects:
+                               [[NSArray alloc]initWithObjects:
+                                [NSNumber numberWithDouble:10.5], 
+                                [NSNumber numberWithDouble:2.0], 
+                                [NSNumber numberWithDouble:5.3], 
+                                nil] 
+                                                           forKeys:
+                               [[NSArray alloc]initWithObjects:
+                                @"x", 
+                                @"a", 
+                                @"b", 
+                                nil]];
+    
+    [self updateDisplay];
+}
+
+- (IBAction)test2Pressed {
+    self.testVariableValues = [[NSDictionary alloc]initWithObjects:
+                               [[NSArray alloc]initWithObjects:
+                                [NSNumber numberWithDouble:8.78],  
+                                [NSNumber numberWithDouble:3.0], 
+                                nil] 
+                                                           forKeys:
+                               [[NSArray alloc]initWithObjects:
+                                @"x",  
+                                @"b", 
+                                nil]];
+    
+    [self updateDisplay];
+}
+
+- (IBAction)test3Pressed {
+    self.testVariableValues = nil;
+    
+    [self updateDisplay];
 }
 
 #pragma mark - Methods (private)
@@ -101,6 +143,8 @@
     self.userAlreadyEnteredADecimal = NO;
 }
 
+
+
 - (void)appendDigitToDisplay:(NSString *)digitAsString {
     if (self.userIsInTheMiddleOfEnteringANumber) {
         self.display.text = [self.display.text stringByAppendingString:digitAsString];
@@ -108,6 +152,14 @@
         self.display.text = digitAsString;
         self.userIsInTheMiddleOfEnteringANumber = YES;
     }
+}
+
+- (void)updateDisplay {
+    double result = [CalculatorBrain runProgram:self.brain.program usingVariableValues:self.testVariableValues];
+    
+    self.display.text = [NSString stringWithFormat:@"%g", result];
+    
+    self.historyDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
 }
 
 - (void)viewDidUnload {

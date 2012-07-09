@@ -71,7 +71,7 @@
 
 #pragma mark -
 
-// TODO: Need to implement according to ticket #14
+// TODO: Need to strip out extra parentheses
 + (NSString *)descriptionOfProgram:(id)program {
     NSMutableArray *programStack = [program mutableCopy];
     
@@ -107,7 +107,7 @@
         for (int i=0; i<[program count]; i++) {
             NSNumber *value = [variableValues objectForKey:[program objectAtIndex:i]];
                 
-            if (!value) {
+            if (value) {
                 [program replaceObjectAtIndex:i withObject:value];
             }
         }
