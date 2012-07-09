@@ -202,7 +202,7 @@
     NSSet *doubleOperandOperations = [[NSSet alloc]initWithObjects:
                                       @"+",
                                       @"*",
-                                      @"-"
+                                      @"-",
                                       @"/",
                                       nil];
     
