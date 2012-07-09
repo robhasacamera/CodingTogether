@@ -73,36 +73,21 @@
 
 // TODO: Need to implement according to ticket #14
 + (NSString *)descriptionOfProgram:(id)program {
-    /*
-     NSString *description = nil;
-    
-    //this is not what's needed
-    for (int i=0; i<[program count]; i++) {
-        if (description) {
-            description = [description stringByAppendingString:@" "];
-        } else {
-            description = @"";
-        }
-        
-        description = [description stringByAppendingFormat:@"%@", [program objectAtIndex:i]];
-    }
-    
-    // regular (dual operand) operations are inserted before the last digit.
-    
-    // single operand operations should encapsulate 
-    
-    // pi and variables are inserted the same as doubles
-    
-    // recursively consume the stack
-    
-    // get rid of extra parens
-    
-    return description;
-     */
-    
     NSMutableArray *programStack = [program mutableCopy];
     
-    return [self descriptionOfTopOfStack:programStack];
+    NSString *description = nil;
+    
+    while ([programStack count] > 0) {
+        if (description) {
+            description = [[NSString alloc]initWithFormat:@"%@, %@", 
+                           [self descriptionOfTopOfStack:programStack],
+                           description];
+        } else {
+            description = [self descriptionOfTopOfStack:programStack];
+        }
+    } 
+    
+    return description;
 }
 
 + (double)runProgram:(id)program {
@@ -255,6 +240,13 @@
                        [stack lastObject]];
         
         [stack removeLastObject];
+        /* doesn't work correctly
+        if ([stack lastObject]) {
+            description = [[NSString alloc]initWithFormat:@"%@, %@",
+                           [self descriptionOfTopOfStack:stack],
+                           description];
+        }
+         */
     }
 
     return description;
