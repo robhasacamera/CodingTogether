@@ -250,9 +250,7 @@
         
         description = [singleOperation stringByAppendingFormat:@"(%@)", 
                        [self descriptionOfTopOfStack:stack]];
-    } else if ([self isNoOperandOperation:[stack lastObject]]
-               || [[stack lastObject] isKindOfClass:[NSNumber class]]
-               || [[stack lastObject] isKindOfClass:[NSString class]]){
+    } else if ([stack lastObject]){
         description = [[NSString alloc]initWithFormat:@"%@", 
                        [stack lastObject]];
         
