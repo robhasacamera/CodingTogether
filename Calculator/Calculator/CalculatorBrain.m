@@ -75,7 +75,6 @@
 
 #pragma mark -
 
-// TODO: Need to strip out extra parentheses
 + (NSString *)descriptionOfProgram:(id)program {
     NSMutableArray *programStack = [program mutableCopy];
     
@@ -216,6 +215,7 @@
     return [noOperandOperations containsObject:operation];
 }
 
+// TODO: This is the function where the extra parens should be removed.
 + (NSString *)descriptionOfTopOfStack:(NSMutableArray *)stack {
     NSString *description = @"";
     
@@ -232,6 +232,9 @@
                        firstOperand,
                        doubleOperation,
                        secondOperand];
+        
+        // decide whether parens need to be added here. 
+        // Possibly use another function to determine this.
     } else if ([self isSingleOperandOperation:[stack lastObject]]) {
         NSString *singleOperation = [stack lastObject];
         
@@ -244,13 +247,6 @@
                        [stack lastObject]];
         
         [stack removeLastObject];
-        /* doesn't work correctly
-        if ([stack lastObject]) {
-            description = [[NSString alloc]initWithFormat:@"%@, %@",
-                           [self descriptionOfTopOfStack:stack],
-                           description];
-        }
-         */
     }
 
     return description;
