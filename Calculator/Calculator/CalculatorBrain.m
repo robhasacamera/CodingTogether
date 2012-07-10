@@ -69,6 +69,10 @@
     return [CalculatorBrain runProgram:self.program];
 }
 
+- (void)undoLastOperationVariableOrOperand {
+    [self.programStack removeLastObject];
+}
+
 #pragma mark -
 
 // TODO: Need to strip out extra parentheses

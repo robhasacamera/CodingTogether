@@ -20,6 +20,8 @@
 
 - (double)performOperation:(NSString *)operation;
 
+- (void)undoLastOperationVariableOrOperand;
+
 + (double)runProgram:(id)program;
 
 + (double)runProgram:(id)program usingVariableValues:(NSDictionary *)variableValues;

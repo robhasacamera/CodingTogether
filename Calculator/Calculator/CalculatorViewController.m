@@ -102,7 +102,8 @@
             self.display.text = @"0";
         }
     } else {
-        // remove last operand/operation
+        [self.brain undoLastOperationVariableOrOperand];
+        [self updateDisplay];
     }
 }
 
