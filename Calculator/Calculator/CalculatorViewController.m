@@ -14,11 +14,8 @@
 @interface CalculatorViewController ()
 
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
-@property (nonatomic) BOOL userAlreadyEnteredADecimal;
 @property (nonatomic, strong) CalculatorBrain *brain;
 @property (nonatomic, strong) NSDictionary *testVariableValues;
-
-- (void)resetStatesForNumberEntry;
 
 - (void)appendDigitToDisplay:(NSString *)digitAsString;
 
@@ -34,7 +31,6 @@
 @synthesize historyDisplay;
 @synthesize variablesDisplay;
 @synthesize userIsInTheMiddleOfEnteringANumber;
-@synthesize userAlreadyEnteredADecimal;
 @synthesize brain = _brain;
 @synthesize testVariableValues;
 
@@ -57,10 +53,8 @@
 }
 
 - (IBAction)decimalPressed {
-    if (!self.userAlreadyEnteredADecimal) {
+    if ([self.display.text rangeOfString:@"."].location == NSNotFound) {
         [self appendDigitToDisplay:@"."];
-        
-        self.userAlreadyEnteredADecimal = YES;
     }
 }
 
@@ -69,13 +63,13 @@
     
     [self updateDisplay];
     
-    [self resetStatesForNumberEntry];
+    self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
 - (IBAction)clearPressed {
     [self.brain clearAllOperands];
     self.display.text = @"0";
-    [self resetStatesForNumberEntry];
+    self.userIsInTheMiddleOfEnteringANumber = NO;
     self.historyDisplay.text = @"";
 }
 
@@ -97,6 +91,19 @@
     [self.brain pushVariable:variable];
     
     [self updateDisplay];
+}
+
+- (IBAction)undoPressed {
+    if (self.userIsInTheMiddleOfEnteringANumber) {
+        self.display.text = [self.display.text substringToIndex:([self.display.text length] - 1)];
+        
+        if ([self.display.text length] <= 0) {
+            self.userIsInTheMiddleOfEnteringANumber = NO;
+            self.display.text = @"0";
+        }
+    } else {
+        // remove last operand/operation
+    }
 }
 
 - (IBAction)test1Pressed {
@@ -138,11 +145,6 @@
 }
 
 #pragma mark - Methods (private)
-
-- (void)resetStatesForNumberEntry {
-    self.userIsInTheMiddleOfEnteringANumber = NO;
-    self.userAlreadyEnteredADecimal = NO;
-}
 
 - (void)appendDigitToDisplay:(NSString *)digitAsString {
     if (self.userIsInTheMiddleOfEnteringANumber) {
