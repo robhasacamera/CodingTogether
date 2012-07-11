@@ -22,7 +22,7 @@
 
 + (BOOL)isNoOperandOperation:(NSString *)operation;
 
-+ (NSString *)descriptionOfTopOfStack:(NSMutableArray *)stack;
++ (NSString *)descriptionOfTopOfStack:(NSMutableArray *)stack withParentOperation:(NSString *)parentOperation ;
 
 @end
 
@@ -78,16 +78,12 @@
 + (NSString *)descriptionOfProgram:(id)program {
     NSMutableArray *programStack = [program mutableCopy];
     
-    NSString *description = nil;
+    NSString *description = [self descriptionOfTopOfStack:programStack withParentOperation:nil];;
     
     while ([programStack count] > 0) {
-        if (description) {
-            description = [[NSString alloc]initWithFormat:@"%@, %@", 
-                           [self descriptionOfTopOfStack:programStack],
-                           description];
-        } else {
-            description = [self descriptionOfTopOfStack:programStack];
-        }
+        description = [[NSString alloc]initWithFormat:@"%@, %@", 
+                       [self descriptionOfTopOfStack:programStack withParentOperation:nil],
+                       description];
     } 
     
     return description;
@@ -216,7 +212,7 @@
 }
 
 // TODO: This is the function where the extra parens should be removed.
-+ (NSString *)descriptionOfTopOfStack:(NSMutableArray *)stack {
++ (NSString *)descriptionOfTopOfStack:(NSMutableArray *)stack withParentOperation:(NSString *)parentOperation {
     NSString *description = @"";
     
     if ([self isDoubleOperandOperation:[stack lastObject]]) {
@@ -224,24 +220,24 @@
         
         [stack removeLastObject];
         
-        NSString *secondOperand = [self descriptionOfTopOfStack:stack];
-        NSString *firstOperand = [self descriptionOfTopOfStack:stack];
+        NSString *secondOperand = [self descriptionOfTopOfStack:stack withParentOperation:doubleOperation];
+        NSString *firstOperand = [self descriptionOfTopOfStack:stack withParentOperation:doubleOperation];
         
-        
-        description = [[NSString alloc]initWithFormat:@"(%@ %@ %@)",
+        description = [[NSString alloc]initWithFormat:@"%@ %@ %@",
                        firstOperand,
                        doubleOperation,
                        secondOperand];
         
-        // decide whether parens need to be added here. 
-        // Possibly use another function to determine this.
+        if ([self precedenceOfOperation:doubleOperation] < [self precedenceOfOperation:parentOperation]) {
+            description = [[NSString alloc]initWithFormat:@"(%@)", description];
+        }
     } else if ([self isSingleOperandOperation:[stack lastObject]]) {
         NSString *singleOperation = [stack lastObject];
         
         [stack removeLastObject];
         
         description = [singleOperation stringByAppendingFormat:@"(%@)", 
-                       [self descriptionOfTopOfStack:stack]];
+                       [self descriptionOfTopOfStack:stack withParentOperation:singleOperation]];
     } else if ([stack lastObject]){
         description = [[NSString alloc]initWithFormat:@"%@", 
                        [stack lastObject]];
@@ -250,6 +246,28 @@
     }
 
     return description;
+}
+
++ (int)precedenceOfOperation:(NSString *)operation {
+    int precedence = 0;
+    
+    if ([operation isEqualToString:@"*"]) {
+        precedence = 3;
+    }
+    
+    if ([operation isEqualToString:@"/"]) {
+        precedence = 3;
+    }
+    
+    if ([operation isEqualToString:@"-"]) {
+        precedence = 2;
+    }
+    
+    if ([operation isEqualToString:@"+"]) {
+        precedence = 1;
+    }
+    
+    return precedence;
 }
 
 @end
