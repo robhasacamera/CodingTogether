@@ -211,7 +211,6 @@
     return [noOperandOperations containsObject:operation];
 }
 
-// TODO: This is the function where the extra parens should be removed.
 + (NSString *)descriptionOfTopOfStack:(NSMutableArray *)stack withParentOperation:(NSString *)parentOperation {
     NSString *description = @"";
     
