@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E18EE3FD15B1334A006201C2 /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18EE3FC15B13349006201C2 /* GraphViewController.m */; };
 		E1C82F47159EAF2200445D31 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C82F46159EAF2200445D31 /* UIKit.framework */; };
 		E1C82F49159EAF2200445D31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C82F48159EAF2200445D31 /* Foundation.framework */; };
 		E1C82F4B159EAF2200445D31 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C82F4A159EAF2200445D31 /* CoreGraphics.framework */; };
@@ -19,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E18EE3FB15B13349006201C2 /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
+		E18EE3FC15B13349006201C2 /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
 		E1C82F42159EAF2200445D31 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1C82F46159EAF2200445D31 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E1C82F48159EAF2200445D31 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -85,6 +88,8 @@
 				E1C82F55159EAF2200445D31 /* CalculatorAppDelegate.h */,
 				E1C82F56159EAF2200445D31 /* CalculatorAppDelegate.m */,
 				E1C82F58159EAF2200445D31 /* MainStoryboard.storyboard */,
+				E18EE3FB15B13349006201C2 /* GraphViewController.h */,
+				E18EE3FC15B13349006201C2 /* GraphViewController.m */,
 				E1C82F5B159EAF2200445D31 /* CalculatorViewController.h */,
 				E1C82F5C159EAF2200445D31 /* CalculatorViewController.m */,
 				E1C82F4D159EAF2200445D31 /* Supporting Files */,
@@ -171,6 +176,7 @@
 				E1C82F57159EAF2200445D31 /* CalculatorAppDelegate.m in Sources */,
 				E1C82F5D159EAF2200445D31 /* CalculatorViewController.m in Sources */,
 				E1C82F65159EC22C00445D31 /* CalculatorBrain.m in Sources */,
+				E18EE3FD15B1334A006201C2 /* GraphViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

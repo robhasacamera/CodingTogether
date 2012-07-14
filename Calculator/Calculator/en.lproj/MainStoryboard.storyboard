@@ -393,11 +393,11 @@
             </objects>
             <point key="canvasLocation" x="926" y="65"/>
         </scene>
-        <!--View Controller - Graph-->
+        <!--Graph View Controller - Graph-->
         <scene sceneID="T5g-R0-lr9">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VtH-rg-eZf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="Ts0-Dk-hdN" sceneMemberID="viewController">
+                <viewController id="Ts0-Dk-hdN" customClass="GraphViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dZx-4K-6Xm">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -434,6 +434,9 @@
                 <relationship kind="outlet" name="display" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="historyDisplay" candidateClass="UILabel"/>
             </relationships>
+        </class>
+        <class className="GraphViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphViewController.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
