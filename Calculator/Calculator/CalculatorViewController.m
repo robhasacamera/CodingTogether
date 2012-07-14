@@ -29,7 +29,6 @@
 
 @synthesize display;
 @synthesize historyDisplay;
-@synthesize variablesDisplay;
 @synthesize userIsInTheMiddleOfEnteringANumber;
 @synthesize brain = _brain;
 @synthesize testVariableValues;
@@ -107,44 +106,6 @@
     }
 }
 
-- (IBAction)test1Pressed {
-    self.testVariableValues = [[NSDictionary alloc]initWithObjects:
-                               [[NSArray alloc]initWithObjects:
-                                [NSNumber numberWithDouble:10.5], 
-                                [NSNumber numberWithDouble:2.0], 
-                                [NSNumber numberWithDouble:5.3], 
-                                nil] 
-                                                           forKeys:
-                               [[NSArray alloc]initWithObjects:
-                                @"x", 
-                                @"a", 
-                                @"b", 
-                                nil]];
-    
-    [self updateDisplay];
-}
-
-- (IBAction)test2Pressed {
-    self.testVariableValues = [[NSDictionary alloc]initWithObjects:
-                               [[NSArray alloc]initWithObjects:
-                                [NSNumber numberWithDouble:8.4],  
-                                [NSNumber numberWithDouble:3.0], 
-                                nil] 
-                                                           forKeys:
-                               [[NSArray alloc]initWithObjects:
-                                @"x",  
-                                @"b", 
-                                nil]];
-    
-    [self updateDisplay];
-}
-
-- (IBAction)test3Pressed {
-    self.testVariableValues = nil;
-    
-    [self updateDisplay];
-}
-
 #pragma mark - Methods (private)
 
 - (void)appendDigitToDisplay:(NSString *)digitAsString {
@@ -162,29 +123,10 @@
     self.display.text = [NSString stringWithFormat:@"%g", result];
     
     self.historyDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
-    
-    NSString *variablesString = @"";
-    
-    NSArray *variables = [[CalculatorBrain variablesUsedInProgram:self.brain.program] allObjects];
-    
-    for (int i=0; i<[variables count]; i++) {
-        NSString *variableName = [variables objectAtIndex:i];
-        
-        NSNumber *variableNumber = [self.testVariableValues objectForKey:variableName];
-        
-        if (!variableNumber) {
-            variableNumber = [NSNumber numberWithDouble:0];
-        }
-        
-        variablesString = [variablesString stringByAppendingFormat:@"%@=%@ ", variableName, variableNumber];
-    }
-    
-    self.variablesDisplay.text = variablesString;
 }
 
 - (void)viewDidUnload {
     [self setHistoryDisplay:nil];
-    [self setVariablesDisplay:nil];
     [self setDisplay:nil];
     [super viewDidUnload];
 }
