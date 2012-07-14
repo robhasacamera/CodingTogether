@@ -378,7 +378,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Calculator" id="Zra-KE-py7"/>
+                    <navigationItem key="navigationItem" title="Calculator" id="Zra-KE-py7">
+                        <barButtonItem key="rightBarButtonItem" title="Graph" id="1cy-Ln-Hwn">
+                            <connections>
+                                <segue destination="Ts0-Dk-hdN" kind="push" id="DT9-w5-Cyn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="display" destination="d09-tn-dD2" id="Yoz-rg-LNr"/>
                         <outlet property="historyDisplay" destination="kMZ-PX-VD6" id="8Kr-uV-ZuH"/>
@@ -386,6 +392,21 @@
                 </viewController>
             </objects>
             <point key="canvasLocation" x="926" y="65"/>
+        </scene>
+        <!--View Controller - Graph-->
+        <scene sceneID="T5g-R0-lr9">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VtH-rg-eZf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Ts0-Dk-hdN" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dZx-4K-6Xm">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Graph" id="HN2-06-XDT"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1410" y="65"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KcO-9u-dX4">
