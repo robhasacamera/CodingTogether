@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GraphViewControllerDataSource.h"
 
-@interface CalculatorViewController : UIViewController
+#define kGraphSegueIdentifier @"showGraph"
+
+@interface CalculatorViewController : UIViewController <GraphViewControllerDataSource>
 
 @property (weak, nonatomic) IBOutlet UILabel *display;
 @property (weak, nonatomic) IBOutlet UILabel *historyDisplay;

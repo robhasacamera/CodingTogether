@@ -8,6 +8,7 @@
 
 #import "CalculatorViewController.h"
 #import "CalculatorBrain.h"
+#import "GraphViewController.h"
 
 #pragma mark - Private properties and operations
 
@@ -123,6 +124,24 @@
     self.display.text = [NSString stringWithFormat:@"%g", result];
     
     self.historyDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:kGraphSegueIdentifier]) {
+        if ([segue.destinationViewController isKindOfClass:[GraphViewController class]]) {
+            ((GraphViewController *)segue.destinationViewController).dataSource = self;
+        }
+    }
+}
+
+#pragma mark - GraphViewControllerDataSource methods
+
+- (float)getYValueForXValue:(float)xValue {
+    return 0;
+}
+
+- (NSString *)getGraphEquation {
+    return [CalculatorBrain descriptionOfProgram:self.brain.program];
 }
 
 - (void)viewDidUnload {

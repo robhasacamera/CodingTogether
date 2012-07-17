@@ -381,7 +381,8 @@
                     <navigationItem key="navigationItem" title="Calculator" id="Zra-KE-py7">
                         <barButtonItem key="rightBarButtonItem" title="Graph" id="1cy-Ln-Hwn">
                             <connections>
-                                <segue destination="Ts0-Dk-hdN" kind="push" id="DT9-w5-Cyn"/>
+                                <action selector="graphButtonPressed:" destination="2" id="LuC-p5-IvQ"/>
+                                <segue destination="Ts0-Dk-hdN" kind="push" identifier="showGraph" id="DT9-w5-Cyn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

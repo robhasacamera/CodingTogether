@@ -14,6 +14,8 @@
 
 @implementation GraphViewController
 
+@synthesize dataSource = _dataSource;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -23,6 +25,7 @@
     return self;
 }
 
+// TODO: if the data source is set, then redraw the graph
 - (void)viewDidLoad
 {
     [super viewDidLoad];

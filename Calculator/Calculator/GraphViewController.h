@@ -10,4 +10,6 @@
 
 @interface GraphViewController : UIViewController
 
+@property (nonatomic, strong) id <GraphViewControllerDataSource> dataSource;
+
 @end

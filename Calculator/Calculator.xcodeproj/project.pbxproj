@@ -20,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E18A552615B5A490009B2848 /* GraphViewControllerDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphViewControllerDataSource.h; sourceTree = "<group>"; };
 		E18EE3FB15B13349006201C2 /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
 		E18EE3FC15B13349006201C2 /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
 		E1C82F42159EAF2200445D31 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +91,7 @@
 				E1C82F58159EAF2200445D31 /* MainStoryboard.storyboard */,
 				E18EE3FB15B13349006201C2 /* GraphViewController.h */,
 				E18EE3FC15B13349006201C2 /* GraphViewController.m */,
+				E18A552615B5A490009B2848 /* GraphViewControllerDataSource.h */,
 				E1C82F5B159EAF2200445D31 /* CalculatorViewController.h */,
 				E1C82F5C159EAF2200445D31 /* CalculatorViewController.m */,
 				E1C82F4D159EAF2200445D31 /* Supporting Files */,
