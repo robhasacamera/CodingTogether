@@ -402,6 +402,26 @@
                     <view key="view" contentMode="scaleToFill" id="dZx-4K-6Xm">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="BHT-6A-9y0" customClass="GraphView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="y1p-zT-IBS">
+                                        <rect key="frame" x="20" y="375" width="280" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="algorithmLabel" destination="y1p-zT-IBS" id="7qh-iO-xjb"/>
+                                </connections>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Graph" id="HN2-06-XDT"/>
@@ -434,6 +454,12 @@
             <relationships>
                 <relationship kind="outlet" name="display" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="historyDisplay" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="GraphView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="algorithmLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="GraphViewController" superclassName="UIViewController">
