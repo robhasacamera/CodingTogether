@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol GraphViewDataSource <id>
+@protocol GraphViewDataSource
 
 @end

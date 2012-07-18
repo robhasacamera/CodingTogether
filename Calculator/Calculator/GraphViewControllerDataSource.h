@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol GraphViewControllerDataSource <NSObject>
+@protocol GraphViewControllerDataSource
 
 - (float)getYValueForXValue:(float)xValue;
 
