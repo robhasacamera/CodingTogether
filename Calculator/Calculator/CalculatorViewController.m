@@ -137,7 +137,9 @@
 #pragma mark - GraphViewControllerDataSource methods
 
 - (float)getYValueForXValue:(float)xValue {
-    return 0;
+
+    
+    return [CalculatorBrain runProgram:self.brain.program usingVariableValues:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:xValue] forKey:@"x"]];
 }
 
 - (NSString *)getGraphEquation {
