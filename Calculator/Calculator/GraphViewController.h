@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "GraphViewControllerDataSource.h"
+#import "GraphView.h"
 
 @interface GraphViewController : UIViewController
 
 @property (nonatomic, strong) id <GraphViewControllerDataSource> dataSource;
+@property (weak, nonatomic) IBOutlet GraphView *graphView;
 
 @end

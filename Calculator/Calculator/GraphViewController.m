@@ -7,33 +7,41 @@
 //
 
 #import "GraphViewController.h"
+#import "GraphViewDataSource.h"
 
-@interface GraphViewController ()
+@interface GraphViewController () <GraphViewDataSource>
+
+- (void)setup;
 
 @end
 
 @implementation GraphViewController
 
 @synthesize dataSource = _dataSource;
+@synthesize graphView = _graphView;
+
+- (void)setup {
+    self.graphView.dataSource = self;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        // setup
     }
     return self;
 }
 
-// TODO: if the data source is set, then redraw the graph
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    self.graphView.dataSource = self;
 }
 
 - (void)viewDidUnload
 {
+    [self setGraphView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -41,6 +49,14 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (float)getYValueForXValue:(float)xValue {
+    return [self.dataSource getYValueForXValue:xValue];
+}
+
+- (NSString *)getGraphEquation {
+    return [self.dataSource getGraphEquation];
 }
 
 @end

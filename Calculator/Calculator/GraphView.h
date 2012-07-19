@@ -12,6 +12,6 @@
 @interface GraphView : UIView
 
 @property (nonatomic, strong) IBOutlet UILabel *algorithmLabel;
-@property (nonatomic, strong) id <GraphViewDataSource> dataSource;
+@property (nonatomic, weak) NSObject <GraphViewDataSource> *dataSource;
 
 @end

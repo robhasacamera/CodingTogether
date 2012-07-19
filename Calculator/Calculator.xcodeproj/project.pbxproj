@@ -103,9 +103,9 @@
 				E18EE3FC15B13349006201C2 /* GraphViewController.m */,
 				E18A552615B5A490009B2848 /* GraphViewControllerDataSource.h */,
 				E1C82F5B159EAF2200445D31 /* CalculatorViewController.h */,
+				E1C82F5C159EAF2200445D31 /* CalculatorViewController.m */,
 				E18A552B15B657A8009B2848 /* GraphView.h */,
 				E18A552C15B657A8009B2848 /* GraphView.m */,
-				E1C82F5C159EAF2200445D31 /* CalculatorViewController.m */,
 				E1C82F4D159EAF2200445D31 /* Supporting Files */,
 			);
 			path = Calculator;

@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol GraphViewDataSource
+@protocol GraphViewDataSource <NSObject>
+
+- (float)getYValueForXValue:(float)xValue;
+
+- (NSString *)getGraphEquation;
 
 @end

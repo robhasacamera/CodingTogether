@@ -37,6 +37,12 @@
 {
     // Drawing code
     [AxesDrawer drawAxesInRect:self.bounds originAtPoint:self.origin scale:self.scale];
+    
+    if (self.dataSource) {
+        self.algorithmLabel.text = [self.dataSource getGraphEquation];
+    } else {
+        self.algorithmLabel.text = @"GraphView's dataSource is undefined";
+    }
 }
 
 - (CGPoint)origin {

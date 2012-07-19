@@ -141,7 +141,7 @@
 }
 
 - (NSString *)getGraphEquation {
-    return [CalculatorBrain descriptionOfProgram:self.brain.program];
+    return [NSString stringWithFormat:@"y = %@", [CalculatorBrain descriptionOfProgram:self.brain.program]];
 }
 
 - (void)viewDidUnload {
