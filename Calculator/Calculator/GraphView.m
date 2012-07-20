@@ -12,7 +12,9 @@
 @interface GraphView ()
 
 @property (nonatomic) CGPoint origin;
-@property (nonatomic) float scale;
+@property (nonatomic) float scale;\
+
+- (void)setup;
 
 @end
 
@@ -24,14 +26,27 @@
 @synthesize origin = _origin;
 @synthesize scale = _scale;
 
+#pragma mark - Initialization
+
+- (void)setup {
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(pan:)];
+    [self addGestureRecognizer:panGesture];
+}
+
+- (void)awakeFromNib {
+    [self setup];
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        [self setup];
     }
     return self;
 }
+
+#pragma mark - Custom Drawing Code
 
 - (void)drawRect:(CGRect)rect
 {
@@ -60,7 +75,6 @@
             } else {
                 CGContextAddLineToPoint(context, i, ((self.origin.y - yValue) * self.scale));
             }
-            NSLog(@"x, y = %f, %f", xValue, yValue);
         }
             
         CGContextStrokePath(context);
@@ -68,6 +82,23 @@
         self.algorithmLabel.text = @"GraphView's dataSource is undefined";
     }
 }
+
+#pragma mark - Gesture Handling
+
+- (void)pan:(UIPanGestureRecognizer *)panGesture {
+    if ((panGesture.state == UIGestureRecognizerStateChanged) 
+        || (panGesture.state == UIGestureRecognizerStateEnded)) {
+        CGPoint translation = [panGesture translationInView:self];
+    
+        CGPoint newOrigin = CGPointMake(self.origin.x + translation.x, self.origin.y + translation.y);
+    
+        self.origin = newOrigin;
+    
+        [panGesture setTranslation:CGPointMake(0.0, 0.0) inView:self];
+    }
+}
+
+#pragma mark - Properties Getters and Setters
 
 - (CGPoint)origin {
     if (!_origin.x || !_origin.y) {
@@ -83,6 +114,18 @@
     }
     
     return _scale;
+}
+
+- (void)setOrigin:(CGPoint)origin {
+    _origin = origin;
+    
+    [self setNeedsDisplay];
+}
+
+- (void)setScale:(float)scale {
+    _scale = scale;
+    
+    [self setNeedsDisplay];
 }
 
 @end
