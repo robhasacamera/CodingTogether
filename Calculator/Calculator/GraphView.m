@@ -9,7 +9,7 @@
 #import "GraphView.h"
 #import "AxesDrawer.h"
 
-@interface GraphView ()
+@interface GraphView () <UIGestureRecognizerDelegate>
 
 @property (nonatomic) CGPoint origin;
 @property (nonatomic) float scale;\
@@ -31,6 +31,12 @@
 - (void)setup {
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(pan:)];
     [self addGestureRecognizer:panGesture];
+    
+    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinch:)];
+    [self addGestureRecognizer:pinchGesture];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
+    [self addGestureRecognizer:tapGesture];
 }
 
 - (void)awakeFromNib {
@@ -70,10 +76,13 @@
             // get y value based on x value
             float yValue = [self.dataSource getYValueForXValue:xValue];
             // add line to point
+            
+            float yValueForDrawing = (self.origin.y - (yValue * self.scale));
+            
             if (i == 0) {
-                CGContextMoveToPoint(context, i, ((self.origin.y - yValue) * self.scale));
+                CGContextMoveToPoint(context, i, yValueForDrawing);
             } else {
-                CGContextAddLineToPoint(context, i, ((self.origin.y - yValue) * self.scale));
+                CGContextAddLineToPoint(context, i, yValueForDrawing);
             }
         }
             
@@ -96,6 +105,20 @@
     
         [panGesture setTranslation:CGPointMake(0.0, 0.0) inView:self];
     }
+}
+
+- (void)pinch:(UIPinchGestureRecognizer *)pinchGesture {
+    if ((pinchGesture.state == UIGestureRecognizerStateChanged)
+        || (pinchGesture.state == UIGestureRecognizerStateEnded)) {
+        
+        self.scale *= pinchGesture.scale;
+        
+        pinchGesture.scale = 1.0;
+    }
+}
+
+- (void)tap:(UITapGestureRecognizer *)tapGesture {
+    
 }
 
 #pragma mark - Properties Getters and Setters
