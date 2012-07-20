@@ -36,6 +36,7 @@
     [self addGestureRecognizer:pinchGesture];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
+    tapGesture.numberOfTapsRequired = 3;
     [self addGestureRecognizer:tapGesture];
 }
 
@@ -118,7 +119,9 @@
 }
 
 - (void)tap:(UITapGestureRecognizer *)tapGesture {
-    
+    if (tapGesture.state == UIGestureRecognizerStateEnded) {
+        self.origin = [tapGesture locationInView:self];
+    }
 }
 
 #pragma mark - Properties Getters and Setters
