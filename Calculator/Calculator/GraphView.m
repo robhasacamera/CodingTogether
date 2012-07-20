@@ -56,16 +56,14 @@
             float yValue = [self.dataSource getYValueForXValue:xValue];
             // add line to point
             if (i == 0) {
-                CGContextMoveToPoint(context, i, ((yValue + self.origin.y) * self.scale));
+                CGContextMoveToPoint(context, i, ((self.origin.y - yValue) * self.scale));
             } else {
-                CGContextAddLineToPoint(context, i, ((yValue + self.origin.y) * self.scale));
+                CGContextAddLineToPoint(context, i, ((self.origin.y - yValue) * self.scale));
             }
             NSLog(@"x, y = %f, %f", xValue, yValue);
         }
             
         CGContextStrokePath(context);
-        
-        NSLog(@"contentScaleFactor = %f", self.contentScaleFactor);
     } else {
         self.algorithmLabel.text = @"GraphView's dataSource is undefined";
     }

@@ -148,9 +148,9 @@
 		E1C82F39159EAF2200445D31 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = Calculator;
+				CLASSPREFIX = "";
 				LastUpgradeCheck = 0430;
-				ORGANIZATIONNAME = Clearwire;
+				ORGANIZATIONNAME = "The Shopper";
 			};
 			buildConfigurationList = E1C82F3C159EAF2200445D31 /* Build configuration list for PBXProject "Calculator" */;
 			compatibilityVersion = "Xcode 3.2";
