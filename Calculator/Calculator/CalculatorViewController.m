@@ -12,7 +12,7 @@
 
 #pragma mark - Private properties and operations
 
-@interface CalculatorViewController ()
+@interface CalculatorViewController () <UISplitViewControllerDelegate>
 
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
 @property (nonatomic, strong) CalculatorBrain *brain;
@@ -21,6 +21,8 @@
 - (void)appendDigitToDisplay:(NSString *)digitAsString;
 
 - (void)updateDisplay;
+
+- (void)setup;
 
 @end
 
@@ -34,6 +36,33 @@
 @synthesize brain = _brain;
 @synthesize testVariableValues;
 
+#pragma mark - Initialization
+
+- (void)setup {
+    if (self.splitViewController) {
+        self.splitViewController.delegate = self;
+        
+        GraphViewController *graphViewController = [self.splitViewController.viewControllers lastObject];
+        
+        graphViewController.dataSource = self;
+    }
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [self setup];
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
+    if (self) {
+        [self setup];
+    }
+    
+    return self;
+}
+
 #pragma mark - Getters (private)
 
 - (CalculatorBrain *)brain {
@@ -45,6 +74,14 @@
 }
 
 #pragma mark - Actions
+
+- (IBAction)graphButtonPressed:(id)sender {
+    if (self.splitViewController) {
+        GraphViewController *graphViewController = [self.splitViewController.viewControllers lastObject];
+        
+        [graphViewController.graphView setNeedsDisplay];
+    }
+}
 
 - (IBAction)digitPressed:(UIButton *)sender {
     NSString *digit = sender.currentTitle;
@@ -150,6 +187,37 @@
     }
     
     return equation;
+}
+
+#pragma mark - UISplitViewControllerDelegate methods
+
+- (BOOL)splitViewController:(UISplitViewController *)svc 
+   shouldHideViewController:(UIViewController *)vc 
+              inOrientation:(UIInterfaceOrientation)orientation {
+    return UIInterfaceOrientationIsPortrait(orientation);
+}
+
+- (void)splitViewController:(UISplitViewController *)svc 
+          popoverController:(UIPopoverController *)pc 
+  willPresentViewController:(UIViewController *)aViewController {
+    
+}
+
+- (void)splitViewController:(UISplitViewController *)svc 
+     willHideViewController:(UIViewController *)aViewController 
+          withBarButtonItem:(UIBarButtonItem *)barButtonItem 
+       forPopoverController:(UIPopoverController *)pc {
+    
+}
+
+- (void)splitViewController:(UISplitViewController *)svc 
+     willShowViewController:(UIViewController *)aViewController 
+  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem {
+    
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return YES;
 }
 
 - (void)viewDidUnload {
