@@ -11,9 +11,6 @@
 
 @interface GraphView () <UIGestureRecognizerDelegate>
 
-@property (nonatomic) CGPoint origin;
-@property (nonatomic) float scale;\
-
 - (void)setup;
 
 @end
@@ -41,6 +38,7 @@
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     [self setup];
 }
 

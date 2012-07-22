@@ -13,5 +13,7 @@
 
 @property (nonatomic, strong) IBOutlet UILabel *algorithmLabel;
 @property (nonatomic, weak) NSObject <GraphViewDataSource> *dataSource;
+@property (nonatomic) CGPoint origin;
+@property (nonatomic) float scale;
 
 @end
