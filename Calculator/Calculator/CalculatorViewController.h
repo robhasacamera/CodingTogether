@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "GraphViewControllerDataSource.h"
+#import "RotatableViewController.h"
 
 #define kGraphSegueIdentifier @"showGraph"
 
-@interface CalculatorViewController : UIViewController <GraphViewControllerDataSource>
+@interface CalculatorViewController : RotatableViewController <GraphViewControllerDataSource>
 
 @property (weak, nonatomic) IBOutlet UILabel *display;
 @property (weak, nonatomic) IBOutlet UILabel *historyDisplay;

@@ -9,9 +9,6 @@
 #import "GraphViewController.h"
 #import "GraphViewDataSource.h"
 
-#define kGraphViewControllerScaleKey @"GraphViewControllerScale"
-#define kGraphViewController
-
 @interface GraphViewController () <GraphViewDataSource>
 
 - (void)setup;
@@ -20,13 +17,15 @@
 
 @implementation GraphViewController
 
-
 static NSString *scaleKey = @"GraphViewControllerScale";
 static NSString *originKey = @"GraphViewControllerOrigin";
 
 @synthesize toolbar = _toolbar;
 @synthesize dataSource = _dataSource;
 @synthesize graphView = _graphView;
+@synthesize splitViewBarButtonItem = _splitViewBarButtonItem;
+
+#pragma mark - Initialization
 
 - (void)setup {
     self.graphView.dataSource = self;
@@ -46,6 +45,8 @@ static NSString *originKey = @"GraphViewControllerOrigin";
     }
     return self;
 }
+
+#pragma mark - View Management
 
 - (void)viewDidLoad
 {
@@ -91,12 +92,33 @@ static NSString *originKey = @"GraphViewControllerOrigin";
     return YES;
 }
 
+#pragma mark - GraphViewDataSource methods
+
 - (float)getYValueForXValue:(float)xValue {
     return [self.dataSource getYValueForXValue:xValue];
 }
 
 - (NSString *)getGraphEquation {
     return [self.dataSource getGraphEquation];
+}
+
+#pragma mark - Setters
+
+- (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem {
+    NSLog(@"%s", __FUNCTION__);
+    NSMutableArray *toolBarItems = [self.toolbar.items mutableCopy];
+    
+    if (_splitViewBarButtonItem) {
+        [toolBarItems removeObject:_splitViewBarButtonItem];
+    }
+    
+    if (splitViewBarButtonItem) {
+        [toolBarItems insertObject:splitViewBarButtonItem atIndex:0];
+    }
+    
+    self.toolbar.items = toolBarItems;
+
+    _splitViewBarButtonItem = splitViewBarButtonItem;
 }
 
 @end

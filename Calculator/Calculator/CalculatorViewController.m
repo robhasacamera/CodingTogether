@@ -25,10 +25,6 @@
 
 - (void)setup;
 
-- (void)setSplitViewBarButton:(UIBarButtonItem *)barButtonItem;
-
-- (void)removeSplitViewBarButton:(UIBarButtonItem *)barButtonItem;
-
 @end
 
 #pragma mark - Implementation
@@ -46,6 +42,7 @@
 
 - (void)setup {
     if (self.splitViewController) {
+        NSLog(@"%s", __FUNCTION__);
         self.splitViewController.delegate = self;
         
         GraphViewController *graphViewController = [self.splitViewController.viewControllers lastObject];
@@ -197,69 +194,16 @@
     return equation;
 }
 
-#pragma mark - UISplitViewControllerDelegate methods
-
-- (BOOL)splitViewController:(UISplitViewController *)svc 
-   shouldHideViewController:(UIViewController *)vc 
-              inOrientation:(UIInterfaceOrientation)orientation {
-    return UIInterfaceOrientationIsPortrait(orientation);
-}
-
-- (void)splitViewController:(UISplitViewController *)svc 
-     willHideViewController:(UIViewController *)aViewController 
-          withBarButtonItem:(UIBarButtonItem *)barButtonItem 
-       forPopoverController:(UIPopoverController *)pc {
-    barButtonItem.title = @"Calculator";
-    
-    [self setSplitViewBarButton:barButtonItem];
-}
-
-- (void)splitViewController:(UISplitViewController *)svc 
-     willShowViewController:(UIViewController *)aViewController 
-  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem {
-    [self removeSplitViewBarButton:barButtonItem];
-}
-
-- (void)setSplitViewBarButton:(UIBarButtonItem *)barButtonItem {
-    if (self.splitViewController) {
-        UIToolbar *toolbar = ((GraphViewController *)[self.splitViewController.viewControllers lastObject]).toolbar;
-        
-        NSMutableArray *toolbarItems = [toolbar.items mutableCopy];
-        
-        if (self.splitViewBarButtonItem) {
-            [toolbarItems removeObject:self.splitViewBarButtonItem];
-        }
-        
-        if (barButtonItem) {
-            [toolbarItems insertObject:barButtonItem atIndex:0];
-        }
-        
-        [toolbar setItems:toolbarItems];
-        
-        self.splitViewBarButtonItem = barButtonItem;
-    }
-}
-
-- (void)removeSplitViewBarButton:(UIBarButtonItem *)barButtonItem {
-    if (self.splitViewController) {
-        UIToolbar *toolbar = ((GraphViewController *)[self.splitViewController.viewControllers lastObject]).toolbar;
-        
-        NSMutableArray *toolbarItems = [toolbar.items mutableCopy];
-        
-        if (barButtonItem) {
-            [toolbarItems removeObject:barButtonItem];
-        }
-        
-        if (barButtonItem == self.splitViewBarButtonItem) {
-            self.splitViewBarButtonItem = nil;
-        }
-        
-        [toolbar setItems:toolbarItems];
-    }
-}
+#pragma mark - View Management
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-    return YES;
+    BOOL rotate = NO;
+    
+    if (self.splitViewController) {
+        rotate = YES;
+    }
+    
+    return rotate;
 }
 
 - (void)viewDidUnload {

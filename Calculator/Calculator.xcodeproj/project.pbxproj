@@ -11,6 +11,7 @@
 		E18A552D15B657A8009B2848 /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = E18A552C15B657A8009B2848 /* GraphView.m */; };
 		E18A552F15B6704F009B2848 /* AxesDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = E18A552415B517E2009B2848 /* AxesDrawer.m */; };
 		E18EE3FD15B1334A006201C2 /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E18EE3FC15B13349006201C2 /* GraphViewController.m */; };
+		E198DA3715C0F09F00D59C29 /* RotatableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E198DA3615C0F09F00D59C29 /* RotatableViewController.m */; };
 		E1C82F47159EAF2200445D31 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C82F46159EAF2200445D31 /* UIKit.framework */; };
 		E1C82F49159EAF2200445D31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C82F48159EAF2200445D31 /* Foundation.framework */; };
 		E1C82F4B159EAF2200445D31 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C82F4A159EAF2200445D31 /* CoreGraphics.framework */; };
@@ -32,6 +33,9 @@
 		E18A552E15B65EE7009B2848 /* GraphViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphViewDataSource.h; sourceTree = "<group>"; };
 		E18EE3FB15B13349006201C2 /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
 		E18EE3FC15B13349006201C2 /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
+		E198DA3515C0F09F00D59C29 /* RotatableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotatableViewController.h; sourceTree = "<group>"; };
+		E198DA3615C0F09F00D59C29 /* RotatableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RotatableViewController.m; sourceTree = "<group>"; };
+		E198DA3915C0F2B600D59C29 /* SplitViewBarButtonPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitViewBarButtonPresenter.h; sourceTree = "<group>"; };
 		E1C82F42159EAF2200445D31 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1C82F46159EAF2200445D31 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E1C82F48159EAF2200445D31 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -109,6 +113,9 @@
 				E1C82F5C159EAF2200445D31 /* CalculatorViewController.m */,
 				E18A552B15B657A8009B2848 /* GraphView.h */,
 				E18A552C15B657A8009B2848 /* GraphView.m */,
+				E198DA3515C0F09F00D59C29 /* RotatableViewController.h */,
+				E198DA3615C0F09F00D59C29 /* RotatableViewController.m */,
+				E198DA3915C0F2B600D59C29 /* SplitViewBarButtonPresenter.h */,
 				E1C82F4D159EAF2200445D31 /* Supporting Files */,
 			);
 			path = Calculator;
@@ -197,6 +204,7 @@
 				E1C82F65159EC22C00445D31 /* CalculatorBrain.m in Sources */,
 				E18EE3FD15B1334A006201C2 /* GraphViewController.m in Sources */,
 				E18A552D15B657A8009B2848 /* GraphView.m in Sources */,
+				E198DA3715C0F09F00D59C29 /* RotatableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
