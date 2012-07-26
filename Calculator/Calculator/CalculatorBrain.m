@@ -149,6 +149,10 @@
             result = cos([self popOperandOffStack:stack]);
         } else if ([operation isEqualToString:@"sqrt"]) {
             result = sqrt([self popOperandOffStack:stack]);
+            
+            if (isnan(result)) {
+                result = 0;
+            }
         } else if ([operation isEqualToString:@"pi"]) {
             result = M_PI;
         }
