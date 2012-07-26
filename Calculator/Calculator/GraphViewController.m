@@ -20,9 +20,11 @@
 
 @implementation GraphViewController
 
+
 static NSString *scaleKey = @"GraphViewControllerScale";
 static NSString *originKey = @"GraphViewControllerOrigin";
 
+@synthesize toolbar = _toolbar;
 @synthesize dataSource = _dataSource;
 @synthesize graphView = _graphView;
 
@@ -80,6 +82,7 @@ static NSString *originKey = @"GraphViewControllerOrigin";
 
 - (void)viewDidUnload
 {
+    [self setToolbar:nil];
     
 }
 

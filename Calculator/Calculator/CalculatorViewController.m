@@ -17,12 +17,17 @@
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
 @property (nonatomic, strong) CalculatorBrain *brain;
 @property (nonatomic, strong) NSDictionary *testVariableValues;
+@property (nonatomic, strong) UIBarButtonItem *splitViewBarButtonItem;
 
 - (void)appendDigitToDisplay:(NSString *)digitAsString;
 
 - (void)updateDisplay;
 
 - (void)setup;
+
+- (void)setSplitViewBarButton:(UIBarButtonItem *)barButtonItem;
+
+- (void)removeSplitViewBarButton:(UIBarButtonItem *)barButtonItem;
 
 @end
 
@@ -35,6 +40,7 @@
 @synthesize userIsInTheMiddleOfEnteringANumber;
 @synthesize brain = _brain;
 @synthesize testVariableValues;
+@synthesize splitViewBarButtonItem = _splitViewBarButtonItem;
 
 #pragma mark - Initialization
 
@@ -45,6 +51,8 @@
         GraphViewController *graphViewController = [self.splitViewController.viewControllers lastObject];
         
         graphViewController.dataSource = self;
+        
+        self.splitViewController.presentsWithGesture = NO;
     }
 }
 
@@ -198,22 +206,56 @@
 }
 
 - (void)splitViewController:(UISplitViewController *)svc 
-          popoverController:(UIPopoverController *)pc 
-  willPresentViewController:(UIViewController *)aViewController {
-    
-}
-
-- (void)splitViewController:(UISplitViewController *)svc 
      willHideViewController:(UIViewController *)aViewController 
           withBarButtonItem:(UIBarButtonItem *)barButtonItem 
        forPopoverController:(UIPopoverController *)pc {
+    barButtonItem.title = @"Calculator";
     
+    [self setSplitViewBarButton:barButtonItem];
 }
 
 - (void)splitViewController:(UISplitViewController *)svc 
      willShowViewController:(UIViewController *)aViewController 
   invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem {
-    
+    [self removeSplitViewBarButton:barButtonItem];
+}
+
+- (void)setSplitViewBarButton:(UIBarButtonItem *)barButtonItem {
+    if (self.splitViewController) {
+        UIToolbar *toolbar = ((GraphViewController *)[self.splitViewController.viewControllers lastObject]).toolbar;
+        
+        NSMutableArray *toolbarItems = [toolbar.items mutableCopy];
+        
+        if (self.splitViewBarButtonItem) {
+            [toolbarItems removeObject:self.splitViewBarButtonItem];
+        }
+        
+        if (barButtonItem) {
+            [toolbarItems insertObject:barButtonItem atIndex:0];
+        }
+        
+        [toolbar setItems:toolbarItems];
+        
+        self.splitViewBarButtonItem = barButtonItem;
+    }
+}
+
+- (void)removeSplitViewBarButton:(UIBarButtonItem *)barButtonItem {
+    if (self.splitViewController) {
+        UIToolbar *toolbar = ((GraphViewController *)[self.splitViewController.viewControllers lastObject]).toolbar;
+        
+        NSMutableArray *toolbarItems = [toolbar.items mutableCopy];
+        
+        if (barButtonItem) {
+            [toolbarItems removeObject:barButtonItem];
+        }
+        
+        if (barButtonItem == self.splitViewBarButtonItem) {
+            self.splitViewBarButtonItem = nil;
+        }
+        
+        [toolbar setItems:toolbarItems];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {

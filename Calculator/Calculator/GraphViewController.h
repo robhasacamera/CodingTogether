@@ -14,5 +14,6 @@
 
 @property (nonatomic, strong) id <GraphViewControllerDataSource> dataSource;
 @property (weak, nonatomic) IBOutlet GraphView *graphView;
+@property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
 
 @end
